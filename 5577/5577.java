@@ -3,6 +3,8 @@ import java.util.*;
 
 class Main
 { 
+	static int b = 0;
+	static int w = 0;
 	static boolean maze[][];
 
 	public static void main (String args[])
@@ -15,9 +17,9 @@ class Main
 			while (!l.equals ("0 0"))
 			{
 				StringTokenizer tk = new StringTokenizer (l);
-				int b = Integer.parseInt (tk.nextToken ());
-				int w = Integer.parseInt (tk.nextToken ());
-				maze = new boolean [b][w];
+				b = Integer.parseInt (tk.nextToken ());
+				w = Integer.parseInt (tk.nextToken ());
+				maze = new boolean [w][b];
 				for (int i = 0; i < b; i++)
 				{
 					String s = in.readLine ();
@@ -25,11 +27,14 @@ class Main
 						System.exit (1);
 					for (int j = 0; j < w; j++) 
 					{
-						if (s.charAt (j) == '0') maze[i][j]	= false;
-						else if (s.charAt (j) == '1') maze[i][j] = true;
+						if (s.charAt (j) == '0') maze[j][i]	= false;
+						else if (s.charAt (j) == '1') maze[j][i] = true;
+						else System.exit (1);
 					}
 				}
+				l = in.readLine ();
 			}
+			out.close ();
 		}
 		catch (IOException e)
 		{
