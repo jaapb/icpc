@@ -20,10 +20,11 @@ facing = 'right'
 def processInput():
     inputFile = open("testdata.txt", "r")
     dimensions = inputFile.readline().split()
+    global height, width
     height = int(dimensions[0]) - 1
     width = int(dimensions[1]) - 1
 
-    for i in range(3):
+    for i in range(height + 1):
         newlist = []
         for i in inputFile.readline():
             if i != '\n':
@@ -32,7 +33,6 @@ def processInput():
                 # dont append anything (not necessary to have an else)
         global maze
         maze.append(newlist)
-
     return maze, height, width
 
 # Iterates through the maze list and adds the coordinates of every tile that
@@ -100,7 +100,7 @@ def look(direction):
     global maze
     if direction == 'N':
         newSquare = (current[0] - 1, current[1])
-        if not 0 <= newSquare[0] <= 2 or not 0 <= newSquare[1] <= 4:
+        if not 0 <= newSquare[0] <= height or not 0 <= newSquare[1] <= width:
             return False
         elif maze[newSquare[0]][newSquare[1]] == 1:
             return False
@@ -109,7 +109,7 @@ def look(direction):
 
     elif direction == 'S':
         newSquare = (current[0] + 1, current[1])
-        if not 0 <= newSquare[0] <= 2 or not 0 <= newSquare[1] <= 4:
+        if not 0 <= newSquare[0] <= height or not 0 <= newSquare[1] <= width:
             return False
         elif maze[newSquare[0]][newSquare[1]] == 1:
             return False
@@ -118,7 +118,7 @@ def look(direction):
 
     elif direction == 'E':
         newSquare = (current[0], current[1] + 1)
-        if not 0 <= newSquare[0] <= 2 or not 0 <= newSquare[1] <= 4:
+        if not 0 <= newSquare[0] <= height or not 0 <= newSquare[1] <= width:
             return False
         elif maze[newSquare[0]][newSquare[1]] == 1:
             return False
@@ -127,7 +127,7 @@ def look(direction):
 
     elif direction == 'W':
         newSquare = (current[0], current[1] - 1)
-        if not 0 <= newSquare[0] <= 2 or not 0 <= newSquare[1] <= 4:
+        if not 0 <= newSquare[0] <= height or not 0 <= newSquare[1] <= width:
             return False
         elif maze[newSquare[0]][newSquare[1]] == 1:
             return False
